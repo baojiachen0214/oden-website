@@ -6,7 +6,7 @@ This public repository contains marketing pages and approved public imagery only
 
 ## Pages and preferences
 
-- `index.html`: product, native screenshots, upcoming 1.3 export workflow, Mac public beta and iPhone/iPad coming soon.
+- `index.html`: resource nodes, canvas/outline editing, formulas, tasks/calendar/reminders, presentation, migration, system integrations, upcoming 1.3 export workflow, public beta, iPhone/iPad coming soon, and the Oden ARC open-source companion.
 - `support.html`, `privacy.html`, `performance.html`: support, current privacy practices and clearly dated historical test records.
 - First visit defaults to English. The header switches English/Chinese; `?lang=en` or `?lang=zh` provides a direct language link. Selection persists in local storage.
 - Appearance defaults to the system and supports explicit Light/Dark choices. Screenshots follow the resolved appearance. No analytics, remote fonts or signup form.
@@ -31,3 +31,9 @@ Keep screenshots paired between appearances. Provide actual dimensions and usefu
 Run `python3 -m http.server 8765 --bind 127.0.0.1` in this folder, then open http://127.0.0.1:8765/. Check 320/375/390/430/768 px and desktop widths in both languages and appearances. Check appearance persistence, page navigation, full-size image dialogs, keyboard focus and the public invitation.
 
 GitHub Pages publishes the repository root on `main` (`.nojekyll`). Commit reviewed changes, merge into `main`, push, and verify the Pages deployment and live pages. Public support is GitHub Issues; beta feedback can also be submitted through TestFlight.
+
+## Open-source companion
+
+[Oden ARC](https://github.com/baojiachen0214/oden-arc) is a separate public Agent Skill and Python toolkit. The landing page’s Open source section links to it; its English/Chinese introductions link back here. The OdenMap application remains closed source. Only companion code and documentation use MIT; the product icon is excluded.
+
+Feature copy is checked against the current 1.3 help and implemented options: 12 export formats, native PDF/X and poster output, both editor views, resource preview behavior, scoped native task integrations and format-dependent imports. Historical performance notes remain qualified; the landing page makes no universal FPS or hardware speed promise.
