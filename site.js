@@ -18,7 +18,7 @@ const messages = {
     "join": "Try OdenMap for Mac",
     "takeLook": "Take a closer look",
     "macRequirements": "macOS 14+ · Apple Silicon & Intel · Free during the beta",
-    "actualApp": "The real Mac app. An illustrative workspace.",
+    "actualApp": "Odenverse, in the real Mac app.",
     "enlarge": "Click to see the details ↗",
     "nativeMac": "Canvas + outline. One document.",
     "localFiles": "Files and formulas inside nodes",
@@ -112,7 +112,7 @@ const messages = {
     "join": "试用 Mac 版 OdenMap",
     "takeLook": "走近看一看",
     "macRequirements": "macOS 14+ · Apple Silicon 与 Intel · 测试期间免费",
-    "actualApp": "真实 Mac 界面，示例研究文稿。",
+    "actualApp": "关东煮宇宙，真实 Mac 界面。",
     "enlarge": "点击查看细节 ↗",
     "nativeMac": "画布与大纲，同一份文稿",
     "localFiles": "文件与公式，直接放进节点",
@@ -203,11 +203,23 @@ const titles = {
  'performance.html': {en:'Test notes — OdenMap',zh:'测试记录 — OdenMap'}
 };
 const shotAlts = {
- canvas:{en:'OdenMap 1.3: a research mind map with an image, Markdown notes and a LaTeX formula.',zh:'OdenMap 1.3：结合图片、Markdown 笔记与 LaTeX 公式的研究导图。'},
- resources:{en:'Real OdenMap resource nodes: an image and a Markdown research note.',zh:'OdenMap 的真实资源节点：图片与 Markdown 研究笔记。'},
+ canvas:{en:'OdenMap 1.3: the Odenverse mind map, with the native toolbar and right-hand style inspector.',zh:'OdenMap 1.3：关东煮宇宙导图，展示原生工具栏和右侧样式检查器。'},
+ resources:{en:'Odenverse in OdenMap: an embedded illustration beside its connected topics, with the style inspector open.',zh:'OdenMap 资源画布局部：嵌入的插画、相连主题与右侧样式检查器。'},
  writing:{en:'The native OdenMap structured writing view, with topics and resources.',zh:'OdenMap 原生结构化写作视图，包含主题和资源。'},
  export:{en:'The native OdenMap 1.3 export window and preview.',zh:'OdenMap 1.3 原生导出窗口与预览。'}
 };
+function updateScreenshots(){
+ const scheme=root.dataset.scheme||'light';
+ document.querySelectorAll('[data-shot]').forEach(img=>{
+  const kind=img.dataset.shot;
+  const localized=kind!=='export';
+  const src=localized?'assets/odenverse-'+kind+'-'+language+'-'+scheme+'.webp':'assets/export-'+scheme+'.webp';
+  if(img.getAttribute('src')!==src)img.src=src;
+  const size=localized?(kind==='canvas'&&language==='zh'?[2160,1344]:[2400,1450]):[2000,1519];
+  img.width=size[0];img.height=size[1];
+  img.alt=shotAlts[kind][language];
+ });
+}
 function applyLanguage(next,save=false){
  language=next==='zh'?'zh':'en';
  root.dataset.lang=language;root.lang=language==='zh'?'zh-Hans':'en';
@@ -217,7 +229,7 @@ function applyLanguage(next,save=false){
  toggle.textContent=language==='zh'?'EN':'中文';toggle.setAttribute('aria-label',language==='zh'?'Switch to English':'切换到简体中文');
  document.querySelector('.appearance summary').setAttribute('aria-label',messages[language].appearance);
  document.querySelectorAll('[data-local]').forEach(a=>{const u=new URL(a.getAttribute('href'),location.href);u.searchParams.set('lang',language);a.href=u.href});
- document.querySelectorAll('[data-shot]').forEach(img=>img.alt=shotAlts[img.dataset.shot][language]);
+ updateScreenshots();
  document.querySelectorAll('[data-zoom]').forEach(b=>b.setAttribute('aria-label',language==='zh'?'放大查看截图':'View full screenshot'));
  document.querySelector('.desktop-nav').setAttribute('aria-label',language==='zh'?'主导航':'Main navigation');
  document.querySelector('.footer-bottom nav').setAttribute('aria-label',language==='zh'?'页脚':'Footer');
@@ -233,7 +245,7 @@ function applyTheme(next,save=false){
  root.dataset.theme=theme;root.dataset.scheme=scheme;
  document.querySelector('meta[name="theme-color"]').content=scheme==='dark'?'#191b19':'#f8f8f5';
  document.querySelectorAll('[data-theme-choice]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeChoice===theme)));
- document.querySelectorAll('[data-shot]').forEach(img=>{img.src='assets/'+img.dataset.shot+'-'+scheme+'.webp'});
+ updateScreenshots();
  if(save)storage.set('oden-theme',theme);
 }
 applyLanguage(language);applyTheme(theme);
